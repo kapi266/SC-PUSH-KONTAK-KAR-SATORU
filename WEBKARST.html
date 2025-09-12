@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARSTORE - All Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0e2a 0%, #232850 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .logo {
+            max-width: 300px;
+            margin: 0 auto 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.03);
+        }
+        
+        .logo img {
+            width: 100%;
+            display: block;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa86b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+        }
+        
+        /* Column Styles */
+        .column {
+            flex: 1;
+            background: rgba(30, 33, 64, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .column-header {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffa86b;
+            text-align: center;
+            color: #ffa86b;
+        }
+        
+        /* Product & Payment Items */
+        .item {
+            background: rgba(40, 44, 80, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .item:hover {
+            background: rgba(50, 55, 100, 0.8);
+            transform: translateX(5px);
+        }
+        
+        .item-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #ffd56b;
+        }
+        
+        .item-desc {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 12px;
+        }
+        
+        .item-price {
+            font-weight: bold;
+            color: #ffa86b;
+        }
+        
+        .buy-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff6b6b, #ffa86b);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        /* Payment Section */
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(40, 44, 80, 0.7);
+            border-radius: 10px;
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .payment-details {
+            flex: 1;
+        }
+        
+        .payment-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffd56b;
+        }
+        
+        .payment-info {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+        
+        .proof {
+            font-size: 0.85rem;
+            color: #ff6b6b;
+            font-style: italic;
+        }
+        
+        .qris-code {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .qris-code img {
+            max-width: 200px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated-item {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Audio Player */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(30, 33, 64, 0.9);
+            padding: 10px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+        
+        .audio-player button {
+            background: linear-gradient(90deg, #ff6b6b, #ffa86b);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://img1.pixhost.to/images/8647/639883576_zion.jpg" alt="KARSTORE Logo">
+            </div>
+            <h1 class="title">ALL INFO KARSTORE</h1>
+        </header>
+        
+        <div class="main-content">
+            <div class="column">
+                <h2 class="column-header">PAYMENT</h2>
+                
+                <div class="payment-method animated-item">
+                    <div class="payment-icon">
+                        <i class="fas fa-wallet" style="color: #00a3ff;"></i>
+                    </div>
+                    <div class="payment-details">
+                        <div class="payment-name">DANA</div>
+                        <div class="payment-info">082172777855</div>
+                        <div class="proof">SERTAKAN BUKTI</div>
+                    </div>
+                </div>
+                
+                <div class="payment-method animated-item">
+                    <div class="payment-icon">
+                        <i class="fab fa-google-wallet" style="color: #7e42f5;"></i>
+                    </div>
+                    <div class="payment-details">
+                        <div class="payment-name">GOPAY</div>
+                        <div class="payment-info">083187841507</div>
+                        <div class="proof">SERTAKAN BUKTI</div>
+                    </div>
+                </div>
+                
+                <div class="payment-method animated-item">
+                    <div class="payment-icon">
+                        <i class="fas fa-money-bill-wave" style="color: #6745c2;"></i>
+                    </div>
+                    <div class="payment-details">
+                        <div class="payment-name">OVO</div>
+                        <div class="payment-info">LANGSUNG KE QR AJA</div>
+                    </div>
+                </div>
+                
+                <div class="payment-method animated-item">
+                    <div class="payment-icon">
+                        <i class="fas fa-qrcode" style="color: #23cf5f;"></i>
+                    </div>
+                    <div class="payment-details">
+                        <div class="payment-name">QRIS</div>
+                        <div class="proof">SERTAKAN BUKTI</div>
+                    </div>
+                </div>
+                
+                <div class="qris-code animated-item">
+                    <img src="https://files.catbox.moe/x62w86.jpg" alt="QRIS Code">
+                    <div class="proof">Scan QRIS untuk pembayaran</div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <h2 class="column-header">STORE</h2>
+                
+                <h3 style="color: #ffd56b; margin: 20px 0 15px; text-align: center;">OPEN PANEL PUBLIC</h3>
+                
+                <div class="item animated-item" onclick="openWAOne()">
+                    <div class="item-title">3 GB/1K</div>
+                    <div class="item-price">Rp 1.000</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <div class="item animated-item" onclick="openWAOne()">
+                    <div class="item-title">4 GB/1,5K</div>
+                    <div class="item-price">Rp 1.500</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <div class="item animated-item" onclick="openWAOne()">
+                    <div class="item-title">5 GB/2K</div>
+                    <div class="item-price">Rp 2.000</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <div class="item animated-item" onclick="openWATwo()">
+                    <div class="item-title">UNLI/5K</div>
+                    <div class="item-price">Rp 5.000</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <h3 style="color: #ffd56b; margin: 30px 0 15px; text-align: center;">LOGO</h3>
+                
+                <div class="item animated-item" onclick="openWATwo()">
+                    <div class="item-title">MURLOG 2K</div>
+                    <div class="item-price">Rp 2.000</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <div class="item animated-item" onclick="openWATwo()">
+                    <div class="item-title">JASLOG</div>
+                    <div class="item-desc">Layanan jasa logo</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <h3 style="color: #ffd56b; margin: 30px 0 15px; text-align: center;">SC BUG AND PUSHKONTAK/JPM/JAGA GB</h3>
+                
+                <div class="item animated-item" onclick="openWAOne()">
+                    <div class="item-title">SC PUSHKONTAK PRIB/3K</div>
+                    <div class="item-price">Rp 3.000</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <div class="item animated-item" onclick="openWAOne()">
+                    <div class="item-title">SC BUG POISON DAN ZODIACK/SC 10K</div>
+                    <div class="item-price">Rp 10.000</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <h3 style="color: #ffd56b; margin: 30px 0 15px; text-align: center;">SEWA JASA PUSHKONTAK</h3>
+                
+                <div class="item animated-item" onclick="openWATwo()">
+                    <div class="item-title">1 JAM 1K</div>
+                    <div class="item-desc">Sewa jasa pushkontak per jam</div>
+                    <div class="item-price">Rp 1.000/jam</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+                
+                <div class="item animated-item" onclick="openWATwo()">
+                    <div class="item-title">PER HARI 1H 5K</div>
+                    <div class="item-desc">Sewa jasa pushkontak per hari</div>
+                    <div class="item-price">Rp 5.000/hari</div>
+                    <a class="buy-btn">BELANJA</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 KARSTORE - All Rights Reserved</p>
+        </footer>
+    </div>
+    
+    <div class="audio-player">
+        <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+        <span>Background Music</span>
+    </div>
+    
+    <audio id="bgAudio" loop>
+        <source src="https://github.com/kapi266/AudioKARST/raw/main/audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Function untuk membuka WhatsApp
+        function openWAOne() {
+            window.open('https://wa.me//6283187841507', '_blank');
+        }
+        
+        function openWATwo() {
+            window.open('https://wa.me//6282117927716', '_blank');
+        }
+        
+        // Auto play audio dan kontrol
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const audio = document.getElementById('bgAudio');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const icon = playPauseBtn.querySelector('i');
+            
+            // Coba putar audio otomatis
+            audio.play().then(() => {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+            }).catch(error => {
+                console.log('Auto-play prevented: ', error);
+            });
+            
+            // Kontrol tombol play/pause
+            playPauseBtn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    icon.classList.remove('fa-play');
+                    icon.classList.add('fa-pause');
+                } else {
+                    audio.pause();
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                }
+            });
+            
+            // Animasi untuk item
+            const items = document.querySelectorAll('.animated-item');
+            items.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
